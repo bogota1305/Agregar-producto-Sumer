@@ -1,0 +1,1 @@
+export 'package:flutter_application_1/widgets/cards/custom_card2.dart';
