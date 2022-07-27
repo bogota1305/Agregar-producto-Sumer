@@ -8,21 +8,59 @@ import 'card_info.dart';
 import 'card_image.dart';
 
 class CustomCard2 extends StatelessWidget {
-  const CustomCard2({Key? key}) : super(key: key);
+  CustomCard2({Key? key, required this.producto}) : super(key: key);
   
+  ProductModel producto;
+
   @override
   Widget build(BuildContext context) {
 
-    String categoria = "Ropa";
-    String nombre = "Hoddie";
-    int precio = 15000;
-    bool availability = true;
-    String img = 'https://cf.shopee.com.co/file/6210e2b09b1b9d9c7866719fce3c9d5f_tn';
+    //String categoria = "Ropa";
+    //String nombre = "Hoddie";
+    //int precio = 15000;
+    //int availability = 1;
+    //String img = 'https://cf.shopee.com.co/file/6210e2b09b1b9d9c7866719fce3c9d5f_tn';
 
-    final tempProducto = new ProductModel(tipo: "Ropa", nombre: "Hoddie", precio: 15000, disponibilidad: true, imagen: 'https://cf.shopee.com.co/file/6210e2b09b1b9d9c7866719fce3c9d5f_tn');
-    DBProvider.db.getProductById(1).then((product) => print(product!.id));
-     
+    String categoria = producto.tipo;
+    String nombre = producto.nombre;
+    int precio = producto.precio;
+    int availability = producto.disponibilidad;
+    String img = producto.imagen;
 
+    
+    //final tempProducto = ProductModel(tipo: categoria, nombre: "Prueba", precio: precio, disponibilidad: availability, imagen: img);
+    //print(tempProducto.nombre);
+    
+    //DBProvider.db.nuevoProducto(tempProducto);
+
+    //DBProvider.db.getProductById(5).then((product) => print(product!.nombre));
+    //DBProvider.db.getProductById(5).then((product) => nombre = product!.nombre);
+
+    //void asignarProducto(ProductModel ?pro){
+
+      //producto = ProductModel(tipo: pro!.tipo, nombre: pro.nombre, precio: pro.precio, disponibilidad: pro.disponibilidad, imagen: pro.imagen);
+      //nombre = producto!.nombre;
+      //print('Producto1: $nombre');
+
+    //}
+
+    print('Producto1:');
+    print(img);
+
+    //DBProvider.db.getProductById(5).then((product) => productos.add(product!));
+
+    //ProductModel(tipo: product!.tipo, nombre: product.nombre, precio: product.precio, disponibilidad: product.disponibilidad, imagen: product.imagen)
+ 
+    //producto = DBProvider.db.getProductById(5);
+
+    //print('Producto2:');
+    //print(productos.length);
+
+    bool disponible = true;
+
+    if(availability == 0){
+      disponible = false;
+    }
    
     return Card(
       
@@ -41,21 +79,21 @@ class CustomCard2 extends StatelessWidget {
               
               children: [
 
-                CardInfo(categoria: categoria, nombre: nombre, precio: precio, availability: availability, ),
+                CardInfo(categoria: categoria, nombre: nombre, precio: precio, availability: disponible, ),
 
-                CardAvailability()
+                CardAvailability(availability: disponible,)
               ],
             ),
 
             
             
-            const SizedBox(width: 73,),
+            const SizedBox(width: 250,),
 
             Column(
               children: [
                 CardImage(img: img),
 
-                CardButtons(categoria: categoria, nombre: nombre, precio: precio, img: img,),
+                CardButtons(producto: producto,),
               ],
             ),
 

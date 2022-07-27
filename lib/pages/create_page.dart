@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/product_model.dart';
 import 'package:flutter_application_1/widgets/form/carousel_index.dart';
 import 'package:flutter_application_1/widgets/form/form_buttom.dart';
 import 'package:flutter_application_1/widgets/form/form_extras.dart';
@@ -18,20 +19,17 @@ String ruta = "";
 class MyHomePage extends StatelessWidget {
 
 
-  final String categoria;
-  final String nombre;
-  final int precio;
-  final String img;
+  final ProductModel producto;
+  final int cambios;
+
  
   int activeIndex = 0;
 
   final int _currentIndex=0;
 
   MyHomePage({Key? key, 
-    required this.categoria, 
-    required this.nombre, 
-    required this.precio,
-    required this.img
+    required this.producto, 
+    required this.cambios
   }) : super(key: key);
 
 
@@ -45,7 +43,7 @@ class MyHomePage extends StatelessWidget {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
 
-    ruta = img;
+    ruta = producto.imagen;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -69,12 +67,7 @@ class MyHomePage extends StatelessWidget {
 
               ImageCarousel(currentIndex: _currentIndex, cardList: cardList),
               
-              FormInfo(categoria: categoria, nombre: nombre, precio: precio), 
-
-              const FormExtras(),
-
-              const FormButton()
-          
+              FormInfo(categoria: producto.tipo, nombre: producto.nombre, precio: producto.precio, disponibilidad: producto.disponibilidad, imagen: producto.imagen, cambios: cambios, id: producto?.id ?? 0,), 
               
             ],
           ),

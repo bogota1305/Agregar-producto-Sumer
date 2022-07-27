@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/product_model.dart';
+import 'dart:async';
+
+import 'package:flutter_share/flutter_share.dart';
 
 import '../../pages/create_page.dart';
 
 class CardButtons extends StatelessWidget {
 
-  final String categoria;
-  final String nombre;
-  final int precio;
-  final String img;
+  final ProductModel producto;
+ 
    
   const CardButtons({Key? key, 
-    required this.categoria, 
-    required this.nombre, 
-    required this.precio, 
-    required this.img
+    required this.producto
     }) : super(key: key);
   
   @override
@@ -24,7 +23,7 @@ class CardButtons extends StatelessWidget {
                       onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MyHomePage(categoria: categoria, nombre: nombre, precio: precio, img: img,)),
+                          MaterialPageRoute(builder: (context) => MyHomePage(producto: producto, cambios: 1,)),
                         );
                       }, 
                       icon: const Icon(Icons.edit), 
@@ -35,7 +34,16 @@ class CardButtons extends StatelessWidget {
                     const SizedBox(width: 30,),
 
                     IconButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        Future<void> share() async {
+                        await FlutterShare.share(
+                          title: 'Example share',
+                          text: 'Example share text',
+                          chooserTitle: 'Example Chooser Title'
+                        );
+  }
+
+                      }, 
                       icon: const Icon(Icons.share), 
                       color: Colors.grey,
                       padding: const EdgeInsets.all(0),

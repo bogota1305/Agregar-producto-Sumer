@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-
-bool productAvailability = true;
    
-class CardAvailability extends StatelessWidget {
+class CardAvailability extends StatefulWidget {
 
-  const CardAvailability({Key? key}) : super(key: key);
-  
+  final bool availability;
+
+  const CardAvailability({Key? key, required this.availability}) : super(key: key);
+
+  @override
+  State<CardAvailability> createState() => _CardAvailabilityState();
+}
+
+class _CardAvailabilityState extends State<CardAvailability> {
+
+  bool productAvailability = true;
+
   @override
   Widget build(BuildContext context) {
 
@@ -29,7 +37,15 @@ class CardAvailability extends StatelessWidget {
                     showOnOff: false,
                     activeColor: const Color.fromARGB(255, 0, 221, 99),
                      onToggle: (val) {
-                        
+                        setState(() {
+
+                          productAvailability = val;
+
+                          if(productAvailability == false){
+                            textColor = Colors.grey;
+                          }
+
+                        });
                       },
                   ),
                   ),
@@ -44,9 +60,5 @@ class CardAvailability extends StatelessWidget {
                     ),         
                 ],
               );
-  }
-
-  bool get availability{
-    return productAvailability;
   }
 }

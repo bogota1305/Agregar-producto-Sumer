@@ -42,6 +42,10 @@ class _FormExtrasState extends State<FormExtras> {
                       ),
                     ),
                   ),
+
+                  SizedBox(width: 150,),
+
+
                   Container(
                     child: FlutterSwitch(
                       width: 40.0,
@@ -73,6 +77,9 @@ class _FormExtrasState extends State<FormExtras> {
                       ),
                     ),
                   ),
+
+                  SizedBox(width: 154,),
+
                   Container(
                     child: FlutterSwitch(
                       width: 40.0,
@@ -114,6 +121,7 @@ class _FormExtrasState extends State<FormExtras> {
                               ),
                             ),
                           ),
+                          SizedBox(width: 145,),
                           Container(
                             margin: const EdgeInsets.only(right: 25),
                             child: Text(

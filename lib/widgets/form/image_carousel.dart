@@ -32,7 +32,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                       child: Row(
                         children: <Widget>[
                           Container(
-                            margin: const EdgeInsets.only(left: 22, right: 160,),
+                            margin: const EdgeInsets.only(left: 22, right: 310,),
                             child: Text(
                               "Foto: $currentIndex de ${widget.cardList.length-1}",
                               style: TextStyle(
@@ -46,6 +46,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                     onTap: () {
                       
                     },
+                    
                     child: Container(
                       margin: EdgeInsets.only(),
                       child: Row(

@@ -22,7 +22,7 @@ class ProductModel {
     String tipo;
     String nombre;
     int precio;
-    bool disponibilidad;
+    int disponibilidad;
     String imagen;
 
     factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(

@@ -6,7 +6,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../models/product_model.dart';
 
-class DBProvider{
+class  DBProvider{
 
   static Database? _database;
   static final DBProvider db = DBProvider._();
@@ -29,7 +29,7 @@ class DBProvider{
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 3,
       onCreate: (Database db, int version) async{
 
         await db.execute('''
@@ -38,7 +38,7 @@ class DBProvider{
             tipo TEXT,
             nombre TEXT,
             precio INTEGER,
-            disponibilidad TEXT,
+            disponibilidad INTEGER,
             imagen TEXT
           )       
         ''');
@@ -51,7 +51,7 @@ class DBProvider{
   Future<int?> nuevoProducto(ProductModel nuevoProducto ) async {
     final db = await database;
     
-    final res = await db?.insert('Products', nuevoProducto.toJson());
+    final res = await db!.insert('Products', nuevoProducto.toJson());
     print(res);
     return res;
   }
@@ -61,8 +61,36 @@ class DBProvider{
     
     final res = await db?.query('Products', where: 'id = ?', whereArgs: [id]);
 
-    return res!.isEmpty
-            ? ProductModel.fromJson(res.first)
-            : null;
+    if(res != null)
+    {
+      return ProductModel.fromJson(res.first);
+    }
+
+    return null;
   }
+
+  Future<List<ProductModel>> getTodosLosProductos() async {
+    final db = await database;
+    
+    final res = await db!.query('Products');
+
+    return res.map((p) => ProductModel.fromJson(p)).toList();
+    
+  }
+
+  Future<int?> updateProduct(ProductModel pro) async {
+    final db = await database;
+    
+    final res = await db?.update('Products', pro.toJson(), where: 'id = ?', whereArgs: [pro.id]);
+
+    return res;
+  } 
+
+  Future<int?> deleteProduct(int id) async{
+    final db = await database; 
+    final res = await db?.delete('Products', where: 'id = ?', whereArgs: [id]);
+
+    return res;
+  }
+
 }
